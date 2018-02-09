@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "test": "jest && eslint ."
+  },
+	"devDependencies": {
+		"eslint": "^4.17.0",
+		"eslint-plugin-node": "^6.0.0",
+		"jest": "^22.2.2",
+		"lerna": "^2.5.1"
+	}
+}

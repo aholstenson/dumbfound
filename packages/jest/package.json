@@ -1,0 +1,11 @@
+{
+  "name": "dumbfound-jest",
+  "version": "0.1.0",
+  "description": "Jest plugin for randomized testing",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": "https://github.com/aholstenson/dumbfound/tree/master/packages/jest",
+  "dependencies": {
+    "dumbfound": "*"
+  }
+}
