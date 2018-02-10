@@ -36,24 +36,24 @@ module.exports.CharacterAlphabet = class CharacterAlphabet extends Alphabet {
  */
 module.exports.RangeAlphabet = class RangeAlphabet extends Alphabet {
 
-	constructor(offset, range) {
+	constructor(start, end) {
 		super();
 
-		this.offset = offset;
-		this.range = range;
+		this.start = start;
+		this.end = end;
 	}
 
 	get length() {
-		return this.range;
+		return this.end - this.start;
 	}
 
 	get(idx) {
-		return String.fromCharCode(this.offset + idx);
+		return String.fromCodePoint(this.start + idx);
 	}
 
 	pick(random) {
-		const idx = this.offset + randomInt(random, 0, this.range);
-		return String.fromCharCode(idx);
+		const idx = randomInt(random, this.start, this.end);
+		return String.fromCodePoint(idx);
 	}
 
 };

@@ -9,6 +9,7 @@ const randomBoolean = require('./random/randomBoolean');
 const { Alphabet } = require('./string/alphabet');
 const randomString = require('./random/randomString');
 const ascii = require('./string/ascii');
+const unicode = require('./string/unicode');
 
 /**
  * Randomizer that provides helper methods to generate random values of
@@ -151,6 +152,19 @@ module.exports = class Randomizer {
 	}
 
 	/**
+	 * Generate string with the given length consisting of printable ASCII
+	 * characters.
+	 *
+	 * @param {number} length
+	 *   Length of the returned string.
+	 * @returns
+	 *   Generated string of the given length.
+	 */
+	ascii(length=undefined) {
+		return this.string(ascii, length);
+	}
+
+	/**
 	 * Generate string with the given length consisting of ASCII digits
 	 * (0 to 9).
 	 *
@@ -197,8 +211,8 @@ module.exports = class Randomizer {
 	 * @returns
 	 *   Generated string of the given length.
 	 */
-	ascii(length=undefined) {
-		return this.string(ascii.withoutSpaces, length);
+	asciiAlphaNumeric(length=undefined) {
+		return this.string(ascii.alphaNumeric, length);
 	}
 
 	/**
@@ -210,7 +224,11 @@ module.exports = class Randomizer {
 	 * @returns
 	 *   Generated string of the given length.
 	 */
-	asciiWithSpaces(length=undefined) {
-		return this.string(ascii.withSpaces, length);
+	asciiAlphaNumericWithSpaces(length=undefined) {
+		return this.string(ascii.alphaNumericWithSpaces, length);
+	}
+
+	unicode(length=undefined) {
+		return this.string(unicode, length);
 	}
 };

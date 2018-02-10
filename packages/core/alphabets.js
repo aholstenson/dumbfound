@@ -1,3 +1,4 @@
 'use strict';
 
-module.exports = require('./string/ascii');
+module.exports.ascii = require('./string/ascii');
+module.exports.unicode = require('./string/unicode');
