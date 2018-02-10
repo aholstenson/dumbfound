@@ -2,8 +2,8 @@
 
 const randomInt = require('../randomInt');
 
-class Alphabet {
-}
+const Alphabet = module.exports.Alphabet = class Alphabet {
+};
 
 /**
  * Alphabet that relies on a string of characters being specified.

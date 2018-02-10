@@ -5,6 +5,10 @@ const randomInt = require('./randomInt');
 const randomNumber = require('./randomNumber');
 const randomBoolean = require('./randomBoolean');
 
+const { Alphabet } = require('./string/alphabet');
+const randomString = require('./randomString');
+const ascii = require('./string/ascii');
+
 /**
  * Randomizer that provides helper methods to generate random values of
  * different types.
@@ -121,5 +125,87 @@ module.exports = class Randomizer {
 		}
 
 		return randomBoolean(this.random, trueProbability);
+	}
+
+	/**
+	 * Generate a string using the given alphabet and length.
+	 *
+	 * @param {Alphabet} alphabet
+	 *   The alphabet to use for generation.
+	 */
+	string(alphabet, length) {
+		if(typeof alphabet !== 'object' || ! (alphabet instanceof Alphabet)) {
+			throw new Error('Alphabet must be provided');
+		}
+
+		if(typeof length !== 'number') {
+			throw new Error('length is required');
+		}
+
+		return randomString(this.random, alphabet, length);
+	}
+
+	/**
+	 * Generate string with the given length consisting of ASCII digits
+	 * (0 to 9).
+	 *
+	 * @param {number} length
+	 *   Length of the returned string.
+	 * @returns
+	 *   Generated string of the given length.
+	 */
+	asciiDigits(length) {
+		return this.string(ascii.digits, length);
+	}
+
+	/**
+	 * Generate a string with the given length consisting of ASCII lower-case
+	 * characters (a to z).
+	 *
+	 * @param {number} length
+	 *   Length of the returned string.
+	 * @returns
+	 *   Generated string of the given length.
+	 */
+	asciiLowercase(length) {
+		return this.string(ascii.lowercase, length);
+	}
+
+	/**
+	 * Generate a string with the given length consisting of ASCII upper-case
+	 * characters (A to Z).
+	 *
+	 * @param {number} length
+	 *   Length of the returned string.
+	 * @returns
+	 *   Generated string of the given length.
+	 */
+	asciiUppercase(length) {
+		return this.string(ascii.uppercase, length);
+	}
+
+	/**
+	 * Generate a string consisting of ASCII upper-case, lower-case and digits.
+	 *
+	 * @param {number} length
+	 *   Length of the returned string.
+	 * @returns
+	 *   Generated string of the given length.
+	 */
+	ascii(length) {
+		return this.string(ascii.withoutSpaces, length);
+	}
+
+	/**
+	 * Generate a string consisting of ASCII upper-case, lower-case, dights
+	 * and spaces.
+	 *
+	 * @param {number} length
+	 *   Length of the returned string.
+	 * @returns
+	 *   Generated string of the given length.
+	 */
+	asciiWithSpaces(length) {
+		return this.string(ascii.withSpaces, length);
 	}
 };
