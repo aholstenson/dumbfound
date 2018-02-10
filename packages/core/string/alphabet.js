@@ -1,6 +1,6 @@
 'use strict';
 
-const randomInt = require('../randomInt');
+const randomInt = require('../random/randomInt');
 
 const Alphabet = module.exports.Alphabet = class Alphabet {
 };

@@ -1,12 +1,13 @@
 'use strict';
 
-const seedRandom = require('seed-random');
-const randomInt = require('./randomInt');
-const randomNumber = require('./randomNumber');
-const randomBoolean = require('./randomBoolean');
+const random = require('./random/source');
+
+const randomInt = require('./random/randomInt');
+const randomNumber = require('./random/randomNumber');
+const randomBoolean = require('./random/randomBoolean');
 
 const { Alphabet } = require('./string/alphabet');
-const randomString = require('./randomString');
+const randomString = require('./random/randomString');
 const ascii = require('./string/ascii');
 
 /**
@@ -31,7 +32,7 @@ module.exports = class Randomizer {
 		}
 
 		this.seed = seed.toString(16);
-		this.random = seedRandom(seed);
+		this.random = random(seed);
 	}
 
 	/**
@@ -197,7 +198,7 @@ module.exports = class Randomizer {
 	}
 
 	/**
-	 * Generate a string consisting of ASCII upper-case, lower-case, dights
+	 * Generate a string consisting of ASCII upper-case, lower-case, digits
 	 * and spaces.
 	 *
 	 * @param {number} length

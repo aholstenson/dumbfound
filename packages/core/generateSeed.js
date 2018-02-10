@@ -1,12 +1,8 @@
 'use strict';
 
-const crypto = require('crypto');
-
 /**
- * Generate a seed by getting a few random bytes from the crypto module of
- * Node and using that to create a 32-bit seed.
+ * Generate a seed by using the time and Math.random().
  */
 module.exports = function() {
-	const buffer = crypto.randomBytes(6);
-	return buffer.readUInt32BE(0).toString(16);
+	return (Date.now() / 100 * Math.random()).toString(16);
 };

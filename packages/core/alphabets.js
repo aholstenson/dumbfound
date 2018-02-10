@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./randomizer/string/ascii');
+module.exports = require('./string/ascii');

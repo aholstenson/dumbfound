@@ -10,7 +10,5 @@
     "randomized testing"
   ],
   "dependencies": {
-    "debug": "^3.1.0",
-    "seed-random": "^2.2.0"
   }
 }
