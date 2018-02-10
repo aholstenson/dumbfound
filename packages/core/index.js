@@ -17,3 +17,6 @@ module.exports.newRandomizer = function(seed) {
 	// Create and return the randomizer
 	return new Randomizer(seed);
 };
+
+// Export alphabets
+module.exports.alphabets = require('./alphabets');
