@@ -134,13 +134,17 @@ module.exports = class Randomizer {
 	 * @param {Alphabet} alphabet
 	 *   The alphabet to use for generation.
 	 */
-	string(alphabet, length) {
+	string(alphabet, length=undefined) {
 		if(typeof alphabet !== 'object' || ! (alphabet instanceof Alphabet)) {
 			throw new Error('Alphabet must be provided');
 		}
 
 		if(typeof length !== 'number') {
-			throw new Error('length is required');
+			if(typeof length === 'undefined') {
+				length = randomInt(this.random, 0, 20);
+			} else {
+				throw new Error('length should be a number');
+			}
 		}
 
 		return randomString(this.random, alphabet, length);
@@ -155,7 +159,7 @@ module.exports = class Randomizer {
 	 * @returns
 	 *   Generated string of the given length.
 	 */
-	asciiDigits(length) {
+	asciiDigits(length=undefined) {
 		return this.string(ascii.digits, length);
 	}
 
@@ -168,7 +172,7 @@ module.exports = class Randomizer {
 	 * @returns
 	 *   Generated string of the given length.
 	 */
-	asciiLowercase(length) {
+	asciiLowercase(length=undefined) {
 		return this.string(ascii.lowercase, length);
 	}
 
@@ -181,7 +185,7 @@ module.exports = class Randomizer {
 	 * @returns
 	 *   Generated string of the given length.
 	 */
-	asciiUppercase(length) {
+	asciiUppercase(length=undefined) {
 		return this.string(ascii.uppercase, length);
 	}
 
@@ -193,7 +197,7 @@ module.exports = class Randomizer {
 	 * @returns
 	 *   Generated string of the given length.
 	 */
-	ascii(length) {
+	ascii(length=undefined) {
 		return this.string(ascii.withoutSpaces, length);
 	}
 
@@ -206,7 +210,7 @@ module.exports = class Randomizer {
 	 * @returns
 	 *   Generated string of the given length.
 	 */
-	asciiWithSpaces(length) {
+	asciiWithSpaces(length=undefined) {
 		return this.string(ascii.withSpaces, length);
 	}
 };
