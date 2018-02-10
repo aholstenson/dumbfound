@@ -1,6 +1,6 @@
 {
   "name": "dumbfound",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Utility for randomized testing",
   "main": "index.js",
   "license": "MIT",
