@@ -3,6 +3,7 @@
 const seedRandom = require('seed-random');
 const randomInt = require('./randomInt');
 const randomNumber = require('./randomNumber');
+const randomBoolean = require('./randomBoolean');
 
 /**
  * Randomizer that provides helper methods to generate random values of
@@ -103,5 +104,22 @@ module.exports = class Randomizer {
 		}
 
 		return randomInt(this.random, min, max);
+	}
+
+	/**
+	 * Generate a boolean, optionally providing a probability of it being
+	 * true.
+	 *
+	 * @param {number} probability
+	 *   Optional probability of the boolean being `true`.
+	 * @returns
+	 *   `true` or `false`
+	 */
+	boolean(trueProbability=0.5) {
+		if(typeof trueProbability !== 'number' || trueProbability < 0 || trueProbability > 1) {
+			throw new Error('probability must be a number between 0 and 1');
+		}
+
+		return randomBoolean(this.random, trueProbability);
 	}
 };
