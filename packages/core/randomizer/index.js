@@ -33,7 +33,9 @@ module.exports = class Randomizer {
 	 * Generate a positive number between 0 and max.
 	 *
 	 * @param {number} max
-	 *   Maximum number to generate.
+	 *   Maximum number to generate (exlusive).
+	 * @returns
+	 *   Number between the 0 and max (exlusive).
 	 */
 	number(max) {
 		if(typeof max !== 'number') {
@@ -47,9 +49,11 @@ module.exports = class Randomizer {
 	 * Generate a random number in the given range.
 	 *
 	 * @param {number} min
-	 *   Minimum number to generate.
+	 *   Minimum number to generate (inclusive).
 	 * @param {number} max
-	 *   Maximum number to generate.
+	 *   Maximum number to generate (exlusive).
+	 * @returns
+	 *   Number between the given min (inclusive) and max (exlusive).
 	 */
 	numberBetween(min, max) {
 		if(typeof min !== 'number') {
@@ -67,7 +71,9 @@ module.exports = class Randomizer {
 	 * Generate a positive integer between 0 and max.
 	 *
 	 * @param {number} max
-	 *   Maximum number to generate.
+	 *   Maximum number to generate (exlusive).
+	 * @returns
+	 *   Number between 0 and max (exlusive).
 	 */
 	int(max) {
 		if(typeof max !== 'number') {
@@ -81,9 +87,11 @@ module.exports = class Randomizer {
 	 * Generate an integer (whole number) in the given range.
 	 *
 	 * @param {number} min
-	 *   Minimum number to generate.
+	 *   Minimum number to generate (inclusive).
 	 * @param {number} max
-	 *   Maximum number to generate.
+	 *   Maximum number to generate (exclusive).
+	 * @returns
+	 *   Number between the given min (inclusive) and max (exlusive).
 	 */
 	intBetween(min, max) {
 		if(typeof min !== 'number') {
