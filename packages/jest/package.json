@@ -5,6 +5,11 @@
   "main": "index.js",
   "license": "MIT",
   "repository": "https://github.com/aholstenson/dumbfound/tree/master/packages/jest",
+  "keywords": [
+    "jest",
+    "randomized testing",
+    "testing"
+  ],
   "dependencies": {
     "dumbfound": "^0.0.1"
   }
