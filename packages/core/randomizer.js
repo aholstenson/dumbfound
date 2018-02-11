@@ -7,6 +7,7 @@ const randomInt = require('./random/randomInt');
 const randomNumber = require('./random/randomNumber');
 const randomBoolean = require('./random/randomBoolean');
 const randomString = require('./random/randomString');
+const randomArray = require('./random/randomArray');
 
 const { CharGenerator } = require('./chars/generators');
 const ascii = require('./chars/ascii');
@@ -257,6 +258,13 @@ module.exports = class Randomizer {
 		return this.string(ascii.alphaNumericWithSpaces, length);
 	}
 
+	/**
+	 * Generate a string consisting of characters from the entire Unicode
+	 * range.
+	 *
+	 * @param {number} length
+	 *   Length of the returned string.
+	 */
 	unicode(length=undefined) {
 		return this.string(unicode, length);
 	}
@@ -287,11 +295,34 @@ module.exports = class Randomizer {
 			throw new Error('A generator function must be provided');
 		}
 
-		// Generate the array
-		const result = [];
-		for(let i=0; i<length; i++) {
-			result.push(generator(i));
+		return randomArray(length, generator, false);
+	}
+
+	/**
+	 * Generate an array of the specified length that is only allowed to
+	 * contain a value once. Will throw an error if unable to get enough
+	 * unique values from the generator.
+	 *
+	 * @param {number} length
+	 * @param {function} generator
+	 */
+	uniqueArray(length=undefined, generator) {
+		if(typeof generator === 'undefined') {
+			// No generator specified, so assuming that length is a generator
+			generator = length;
+			length = undefined;
 		}
-		return result;
+
+		if(typeof length === 'undefined') {
+			length = randomInt(this.random, 0, 10);
+		} else {
+			length = resolveValue(length);
+		}
+
+		if(typeof generator !== 'function') {
+			throw new Error('A generator function must be provided');
+		}
+
+		return randomArray(length, generator, true);
 	}
 };

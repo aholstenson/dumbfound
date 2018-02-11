@@ -85,8 +85,10 @@ const arr1 = random.array(idx => 'Item ' + idx);
 const arr2 = random.gen.int(500000);
 ```
 
-* `array(generator)` - generate an array with a length of between 0 and 10 items
+* `array(generator)` - generate an array with a length of between 0 and 10 items.
 * `array(length, generator)` - generate an array of the given length.
+* `uniqueArray(generator) ` - generate an array with unique items with a length of between 0 and 10 items.
+* `uniqueArray(length, generator)` - generate an array with unique items of the given length.
 
 ## Generators
 
