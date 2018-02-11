@@ -3,6 +3,7 @@
 const generator = require('./generator');
 const random = require('./random/source');
 
+const pickWeighted = require('./random/pickWeighted');
 const randomInt = require('./random/randomInt');
 const randomNumber = require('./random/randomNumber');
 const randomBoolean = require('./random/randomBoolean');
@@ -288,6 +289,41 @@ module.exports = class Randomizer {
 	 */
 	unicode(length=undefined) {
 		return this.string(unicode, length);
+	}
+
+	/**
+	 * Pick one of the items in the given array using an equally distributed
+	 * probability.
+	 *
+	 * @param {array} items
+	 *   Array of items to pick from. Entries in the array may be generators
+	 *   in which case they will be invoked.
+	 * @returns
+	 *   Picked value.
+	 */
+	pick(items, weights) {
+		items = resolveValue(items);
+		if(! Array.isArray(items)) {
+			throw new Error('items must be an array');
+		}
+
+		let idx;
+
+		weights = resolveValue(weights);
+		if(Array.isArray(weights)) {
+			// This a weighted request
+			if(items.length !== weights.length) {
+				throw new Error('Number of items and weights must be equal');
+			}
+
+			idx = pickWeighted(this.random, weights);
+		} else if(typeof weights !== 'undefined') {
+			throw new Error('weights must be an array or omitted');
+		} else {
+			idx = randomInt(this.random, 0, items.length);
+		}
+
+		return resolveValue(items[idx]);
 	}
 
 	/**
