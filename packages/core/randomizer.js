@@ -1,5 +1,6 @@
 'use strict';
 
+const generator = require('./generator');
 const random = require('./random/source');
 
 const randomInt = require('./random/randomInt');
@@ -10,6 +11,17 @@ const randomString = require('./random/randomString');
 const { CharGenerator } = require('./chars/generators');
 const ascii = require('./chars/ascii');
 const unicode = require('./chars/unicode');
+
+/**
+ * Resolve a value, invoking a generator function as needed.
+ */
+function resolveValue(v) {
+	if(generator.isGenerator(v)) {
+		return v();
+	}
+
+	return v;
+}
 
 /**
  * Randomizer that provides helper methods to generate random values of
@@ -34,6 +46,9 @@ module.exports = class Randomizer {
 
 		this.seed = seed.toString(16);
 		this.random = random(seed);
+
+		// Create a generator that wraps this randomizer
+		this.gen = generator(this);
 	}
 
 	/**
@@ -45,6 +60,8 @@ module.exports = class Randomizer {
 	 *   Number between the 0 and max (exlusive).
 	 */
 	number(max) {
+		max = resolveValue(max);
+
 		if(typeof max !== 'number') {
 			throw new Error('max is required to be a number');
 		}
@@ -63,6 +80,9 @@ module.exports = class Randomizer {
 	 *   Number between the given min (inclusive) and max (exlusive).
 	 */
 	numberBetween(min, max) {
+		min = resolveValue(min);
+		max = resolveValue(max);
+
 		if(typeof min !== 'number') {
 			throw new Error('min is required to be a number');
 		}
@@ -83,6 +103,8 @@ module.exports = class Randomizer {
 	 *   Number between 0 and max (exlusive).
 	 */
 	int(max) {
+		max = resolveValue(max);
+
 		if(typeof max !== 'number') {
 			throw new Error('max is required to be a number');
 		}
@@ -101,6 +123,9 @@ module.exports = class Randomizer {
 	 *   Number between the given min (inclusive) and max (exlusive).
 	 */
 	intBetween(min, max) {
+		min = resolveValue(min);
+		max = resolveValue(max);
+
 		if(typeof min !== 'number') {
 			throw new Error('min is required to be a number');
 		}
@@ -122,6 +147,8 @@ module.exports = class Randomizer {
 	 *   `true` or `false`
 	 */
 	boolean(trueProbability=0.5) {
+		trueProbability = resolveValue(trueProbability);
+
 		if(typeof trueProbability !== 'number' || trueProbability < 0 || trueProbability > 1) {
 			throw new Error('probability must be a number between 0 and 1');
 		}
@@ -136,10 +163,12 @@ module.exports = class Randomizer {
 	 *   The generator to use for creating the string.
 	 */
 	string(generator, length=undefined) {
+		generator = resolveValue(generator);
 		if(typeof generator !== 'object' || ! (generator instanceof CharGenerator)) {
 			throw new Error('Generator must be provided');
 		}
 
+		length = resolveValue(length);
 		if(typeof length !== 'number') {
 			if(typeof length === 'undefined') {
 				length = randomInt(this.random, 0, 20);
@@ -148,7 +177,7 @@ module.exports = class Randomizer {
 			}
 		}
 
-		return randomString(this.random, alphabet, length);
+		return randomString(this.random, generator, length);
 	}
 
 	/**
