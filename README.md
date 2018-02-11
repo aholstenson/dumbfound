@@ -4,8 +4,6 @@ Randomized testing for JavaScript. Dumbfound hooks into test runners such as
 Mocha and Jest and provides randomization for specified tests and helps with
 making test failures reproducible.
 
-*Note:* This is currently a very early version that does almost nothing useful.
-
 ## Introduction
 
 Randomized testing is built around the idea that tests should sometimes fail,
@@ -17,6 +15,8 @@ Dumbfound is built around supplying deterministic randomness that can be used
 by a test case to generate random data. The deterministic aspect helps with
 making test failures reproducible by providing a seed that can be used to
 replay the test case.
+
+Runners are currently available for [Jest][jest] and [Mocha][mocha].
 
 ## Example using Jest
 
@@ -56,7 +56,7 @@ const picked = random.pick([ 'a', 'b', 'c' ]);
 ```
 
 Generators are functions that resolve a value when invoked. The Randomizer API
-is available in a generator form, via the `gen` property. Generators
+is available in a generator form, via the `gen` 7property. Generators
 are useful to model a more complex data that you want to use several times.
 
 Example of creating generator functions:
@@ -120,7 +120,7 @@ a string between 0 and 20 characters will be returned.
   `string(charGenerator, length)` - generate a string using the given character generator.
 
   Character generators are required and common implementation are available via
-  the key `chars` when requiring the library:library:
+  the key `chars` when requiring the library:
 
   ```javascript
   const { chars } = require('dumbfound-testRunnerHere');
@@ -142,7 +142,7 @@ Arrays can be created via the `array` function and require a generator function.
 
 ```javascript
 const arr1 = random.array(idx => 'Item ' + idx);
-const arr2 = random.gen.int(500000);
+const arr2 = random.array(25, random.gen.int(500000));
 ```
 
 * `array(generator)` - generate an array with a length between 0 and 10.
@@ -167,3 +167,6 @@ const arr2 = random.gen.int(500000);
 ## Misc
 
 * `uuid()` - generate a UUIDv4.
+
+[jest]: https://github.com/aholstenson/dumbfound/tree/master/packages/jest
+[mocha]:https://github.com/aholstenson/dumbfound/tree/master/packages/mocha
