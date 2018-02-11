@@ -5,11 +5,11 @@ const random = require('./random/source');
 const randomInt = require('./random/randomInt');
 const randomNumber = require('./random/randomNumber');
 const randomBoolean = require('./random/randomBoolean');
-
-const { Alphabet } = require('./string/alphabet');
 const randomString = require('./random/randomString');
-const ascii = require('./string/ascii');
-const unicode = require('./string/unicode');
+
+const { CharGenerator } = require('./chars/generators');
+const ascii = require('./chars/ascii');
+const unicode = require('./chars/unicode');
 
 /**
  * Randomizer that provides helper methods to generate random values of
@@ -130,14 +130,14 @@ module.exports = class Randomizer {
 	}
 
 	/**
-	 * Generate a string using the given alphabet and length.
+	 * Generate a string using the given generator and length.
 	 *
-	 * @param {Alphabet} alphabet
-	 *   The alphabet to use for generation.
+	 * @param {Generator} generator
+	 *   The generator to use for creating the string.
 	 */
-	string(alphabet, length=undefined) {
-		if(typeof alphabet !== 'object' || ! (alphabet instanceof Alphabet)) {
-			throw new Error('Alphabet must be provided');
+	string(generator, length=undefined) {
+		if(typeof generator !== 'object' || ! (generator instanceof CharGenerator)) {
+			throw new Error('Generator must be provided');
 		}
 
 		if(typeof length !== 'number') {

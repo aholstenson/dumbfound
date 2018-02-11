@@ -2,5 +2,5 @@
 
 module.exports.test = module.exports.randomizedTest = require('./randomizedTest');
 
-// Utility for accessing alphabets used with strings
-module.exports.alphabets = require('dumbfound/alphabets');
+// Utility for accessing generators used with characters
+module.exports.chars = require('dumbfound/chars');

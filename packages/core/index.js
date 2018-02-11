@@ -18,5 +18,5 @@ module.exports.newRandomizer = function(seed) {
 	return new Randomizer(seed);
 };
 
-// Export alphabets
-module.exports.alphabets = require('./alphabets');
+// Export character generators
+module.exports.chars = require('./chars');
