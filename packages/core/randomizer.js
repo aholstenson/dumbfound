@@ -299,6 +299,36 @@ module.exports = class Randomizer {
 	}
 
 	/**
+	 * Generate a value, either `null`, `NaN`, `undefined`, a number, a
+	 * boolean or a string.
+	 */
+	primitiveValue() {
+		const picked = pickWeighted(this.random, [
+			2, // null
+			1, // NaN,
+			2, // undefined,
+			5, // number
+			4, // boolean,
+			5 // string
+		]);
+
+		switch(picked) {
+			case 0:
+				return null;
+			case 1:
+				return NaN;
+			case 2:
+				return undefined;
+			case 3:
+				return this.number();
+			case 4:
+				return this.boolean();
+			case 5:
+				return this.ascii();
+		}
+	}
+
+	/**
 	 * Pick one of the items in the given array using an equally distributed
 	 * probability.
 	 *
