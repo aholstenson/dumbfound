@@ -132,6 +132,7 @@ a string between 0 and 20 characters will be returned.
 * `asciiUppercase(length)` - generate string with ASCII uppwer-case characters (A to Z) of the given length.
 * `ascii(length)` - generate string with ASCII characters (lower-case, upper-case, digits) of the given length.
 * `asciiWithSpaces(length)` - generate string with ASCII characters including spaces of the given length.
+* `unicode(length)` - generate a string with any Unicode character of the given length.
 
 ## Arrays and Sets
 
