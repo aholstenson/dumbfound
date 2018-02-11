@@ -171,6 +171,8 @@ const arr2 = random.array(25, random.gen.int(500000));
 * `pick(items)` - pick a single item from the given array. Items in the array may be generators in which case they will be resolved.
 * `pick(items, weights)` - pick a single item from the given array while applying weights to each item.
 * `primitiveValue()` - generate a primitive value, either `null`, `NaN`, `undefined`, a number, a boolean or a string. 
+* `truthy()` - generate a truthy value, that is a value that when used with `if(value)` would resolve to `true`.
+* `falsy()` - generate a falsy value, that is a value that when used with `if(value)` would resolve to `false`.
 
 ### Misc
 

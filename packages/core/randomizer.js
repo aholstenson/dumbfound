@@ -378,6 +378,78 @@ module.exports = class Randomizer {
 	}
 
 	/**
+	 * Generate a truthy value. Will generate values that would be true when
+	 * put into an `if`-statement.
+	 *
+	 * @returns
+	 *   Truthy value.
+	 */
+	truthy() {
+		const picked = pickWeighted(this.random, [
+			20, // Boolean
+			5, // Object
+			5, // Array
+			5, // String
+			5, // Number
+			1, // Negative number,
+			3, // Infinity,
+			3 // Negative Infinity
+		]);
+
+		switch(picked) {
+			case 0:
+				return true;
+			case 1:
+				return {};
+			case 2:
+				return [];
+			case 3:
+				return this.ascii(this.intBetween(1, 25));
+			case 4:
+				return this.intBetween(1, 25);
+			case 5:
+				return this.intBetween(-25, -1);
+			case 6:
+				return Number.POSITIVE_INFINITY;
+			case 7:
+				return Number.NEGATIVE_INFINITY;
+		}
+	}
+
+	/**
+	 * Generate a falsy value. Will generate values that would be false when
+	 * put into an `if`-statement.
+	 *
+	 * @returns
+	 *   Falsy value.
+	 */
+	falsy() {
+		const picked = pickWeighted(this.random, [
+			20, // Boolean
+			10, // Null
+			5, // Undefined
+			5, // Zero
+			5, // NaN
+			10, // Empty string
+		]);
+
+		switch(picked) {
+			case 0:
+				return false;
+			case 1:
+				return null;
+			case 2:
+				return undefined;
+			case 3:
+				return 0;
+			case 4:
+				return Number.NaN;
+			case 5:
+				return '';
+		}
+	}
+
+	/**
 	 * Pick one of the items in the given array using an equally distributed
 	 * probability.
 	 *
