@@ -75,7 +75,8 @@ module.exports = class Randomizer {
 	}
 
 	/**
-	 * Generate a positive number between 0 and max.
+	 * Generate a number. When max is specified the returned number will be
+	 * between 0 and max.
 	 *
 	 * @param {number} max
 	 *   Maximum number to generate (exlusive).
@@ -84,12 +85,15 @@ module.exports = class Randomizer {
 	 */
 	number(max) {
 		max = resolveValue(max);
-
-		if(typeof max !== 'number') {
+		let min = 0;
+		if(typeof max === 'undefined') {
+			min = Number.MIN_SAFE_INTEGER / 1000000;
+			max = Number.MAX_SAFE_INTEGER / 1000000;
+		} else if(typeof max !== 'number') {
 			throw new Error('max is required to be a number');
 		}
 
-		return randomNumber(this.random, 0, max);
+		return randomNumber(this.random, min, max);
 	}
 
 	/**
@@ -127,12 +131,15 @@ module.exports = class Randomizer {
 	 */
 	int(max) {
 		max = resolveValue(max);
-
-		if(typeof max !== 'number') {
+		let min = 0;
+		if(typeof max === 'undefined') {
+			min = Number.MIN_SAFE_INTEGER;
+			max = Number.MAX_SAFE_INTEGER;
+		} else if(typeof max !== 'number') {
 			throw new Error('max is required to be a number');
 		}
 
-		return randomInt(this.random, 0, max);
+		return randomInt(this.random, min, max);
 	}
 
 	/**

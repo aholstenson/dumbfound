@@ -99,8 +99,10 @@ chosen bounds.
 
 ### Numbers
 
+* `number()` - generate a number.
 * `number(max)` - generate a number between 0 and max (exclusive).
 * `numberBetween(min, max)` - generate a number between min (exlusive) and max (exclusive).
+* `int()` - generate a whole number.
 * `int(max)` - generate a whole number between 0 and max (exclusive).
 * `int(min, max)` - generate a whole number between min (inclusive) and max (exclusive).
 
