@@ -163,3 +163,7 @@ const arr2 = random.gen.int(500000);
 * `pick(items)` - pick a single item from the given array. Items in the array may be generators in which case they will be resolved.
 * `pick(items, weights)` - pick a single item from the given array while applying weights to each item.
 * `primitiveValue()` - generate a primitive value, either `null`, `NaN`, `undefined`, a number, a boolean or a string. 
+
+## Misc
+
+* `uuid()` - generate a UUIDv4.

@@ -9,6 +9,7 @@ const randomNumber = require('./random/randomNumber');
 const randomBoolean = require('./random/randomBoolean');
 const randomString = require('./random/randomString');
 const randomArray = require('./random/randomArray');
+const randomUUID = require('./random/randomUUID');
 
 const { CharGenerator } = require('./chars/generators');
 const ascii = require('./chars/ascii');
@@ -427,5 +428,12 @@ module.exports = class Randomizer {
 	set(length=undefined, generator) {
 		const values = this.uniqueArray(length, generator);
 		return new Set(values);
+	}
+
+	/**
+	 * Generate UUIDv4.
+	 */
+	uuid() {
+		return randomUUID(this.random);
 	}
 };
