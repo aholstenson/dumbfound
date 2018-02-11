@@ -144,7 +144,7 @@ a string between 0 and 20 characters will be returned.
 * `asciiWithSpaces(length)` - generate string with ASCII characters including spaces of the given length.
 * `unicode(length)` - generate a string with any Unicode character of the given length.
 
-## Arrays and Sets
+### Arrays and Sets
 
 Arrays can be created via the `array` function and require a generator function.
 
@@ -160,21 +160,26 @@ const arr2 = random.array(25, random.gen.int(500000));
 * `set(generator)` - generate a Set (with unique items) with a length between 0 and 10.
 * `set(length, generator)` - generate a Set (with unique items) of the given length.
 
-## Static values
+### Static values
 
 * `nan()` - always generate a `NaN` value. For use as a generator.
 * `null()` - always generate a `null` value. For use as a generator.
 * `undefined()` - always generate a `undefined` value. For use as a generator.
 
-## Value picking
+### Value picking
 
 * `pick(items)` - pick a single item from the given array. Items in the array may be generators in which case they will be resolved.
 * `pick(items, weights)` - pick a single item from the given array while applying weights to each item.
 * `primitiveValue()` - generate a primitive value, either `null`, `NaN`, `undefined`, a number, a boolean or a string. 
 
-## Misc
+### Misc
 
 * `uuid()` - generate a UUIDv4.
 
+## A note on randomness
+
+The randomness provided by this library is not cryptographically secure, and
+the quality of the random generator is "good enough" for testing. Don't use it
+for things that need statistically provable randomness.
 [jest]: https://github.com/aholstenson/dumbfound/tree/master/packages/jest
 [mocha]:https://github.com/aholstenson/dumbfound/tree/master/packages/mocha
