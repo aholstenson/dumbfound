@@ -37,6 +37,7 @@ randomizedTest('Example', random => {
   // Do something useful with the test here
 });
 
+// Generate a random number of runs of the given test
 randomizedRuns('Group name', 1, 5, () => {
   randomizedTest('Test in group', random => {
     ...
