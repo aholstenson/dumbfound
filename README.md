@@ -184,5 +184,6 @@ const arr2 = random.array(25, random.gen.int(500000));
 The randomness provided by this library is not cryptographically secure, and
 the quality of the random generator is "good enough" for testing. Don't use it
 for things that need statistically provable randomness.
+
 [jest]: https://github.com/aholstenson/dumbfound/tree/master/packages/jest
 [mocha]:https://github.com/aholstenson/dumbfound/tree/master/packages/mocha
