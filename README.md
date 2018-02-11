@@ -38,7 +38,64 @@ randomizedTest('Example', random => {
 });
 ```
 
-## Randomizer API
+## Randomizer and generators
+
+The randomizer is the main API for generating random values. For most test
+runners it is supplied as the first argument in the test function. Methods on
+the object can be used to generate random values by invoking them either
+directly or via a generator function.
+
+Example invoking them directly:
+
+```javascript
+// Generate an int between 0 and 500
+const i = random.int(500);
+
+// Pick an item
+const picked = random.pick([ 'a', 'b', 'c' ]);
+```
+
+Generators are functions that resolve a value when invoked. The Randomizer API
+is available in a generator form, via the `gen` property. Generators
+are useful to model a more complex data that you want to use several times.
+
+Example of creating generator functions:
+
+```javascript
+// Create a function that generates an int between 0 and 500
+const intCreator = random.gen.int(500);
+
+// Generate an in between 0 and 500
+const i = intCreator();
+const i2 = intCreator(); // Will generate another int
+
+// Create a picker function
+const picker = random.gen.pick([ 'a', 'b', 'c' ]);
+// Pick the item
+const picked = picker();
+```
+
+Example of more complex generator:
+
+```javascript
+/*
+ * Greate a generator that produces an array between 5 and 25 items with
+ * ASCII strings.
+ */
+const fn = random.gen.array(
+  random.gen.intBetween(5, 25),
+  random.gen.ascii()
+);
+
+const array1 = fn();
+const array2 = fn();
+```
+
+## Randomizer and Generator API
+
+For randomizer these methods will return the generated value and for generators
+they will return a function that can be used to generate a value within the
+chosen bounds.
 
 ### Numbers
 
@@ -92,26 +149,4 @@ const arr2 = random.gen.int(500000);
 * `set(generator)` - generate a Set (with unique items) with a length between 0 and 10.
 * `set(length, generator)` - generate a Set (with unique items) of the given length.
 
-## Generators
 
-Generators are functions that resolve a value when invoked. The Randomizer API
-is available in a generator form, via the `randomizer.gen` object. Generators
-are useful to model a more complex data that you want to use several times.
-
-Example:
-
-```javascript
-const random = // randomizer for your test-case;
-
-/*
- * Greate a generator that produces an array between 5 and 25 items with
- * ASCII strings.
- */
-const fn = random.gen.array(
-  random.gen.intBetween(5, 25),
-  random.gen.ascii()
-);
-
-const array1 = fn();
-const array2 = fn();
-```
