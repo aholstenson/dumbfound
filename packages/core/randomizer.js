@@ -6,6 +6,7 @@ const random = require('./random/source');
 const pickWeighted = require('./random/pickWeighted');
 const randomInt = require('./random/randomInt');
 const randomNumber = require('./random/randomNumber');
+const randomEvilNumber = require('./random/randomEvilNumber');
 const randomBoolean = require('./random/randomBoolean');
 const randomString = require('./random/randomString');
 const randomArray = require('./random/randomArray');
@@ -166,6 +167,53 @@ module.exports = class Randomizer {
 		}
 
 		return randomInt(this.random, min, max);
+	}
+
+	/**
+	 * Generate an evil number. When max is specified the returned number will
+	 * be between 0 and max.
+	 *
+	 * @param {number} max
+	 *   Maximum number to generate (exlusive).
+	 * @returns
+	 *   Number between the 0 and max (exlusive).
+	 */
+	evilNumber(max) {
+		max = resolveValue(max);
+		let min = 0;
+		if(typeof max === 'undefined') {
+			min = Number.MIN_SAFE_INTEGER / 1000000;
+			max = Number.MAX_SAFE_INTEGER / 1000000;
+		} else if(typeof max !== 'number') {
+			throw new Error('max is required to be a number');
+		}
+
+		return randomEvilNumber(this.random, min, max);
+	}
+
+	/**
+	 * Generate an evil random number in the given range.
+	 *
+	 * @param {number} min
+	 *   Minimum number to generate (inclusive).
+	 * @param {number} max
+	 *   Maximum number to generate (exlusive).
+	 * @returns
+	 *   Number between the given min (inclusive) and max (exlusive).
+	 */
+	evilNumberBetween(min, max) {
+		min = resolveValue(min);
+		max = resolveValue(max);
+
+		if(typeof min !== 'number') {
+			throw new Error('min is required to be a number');
+		}
+
+		if(typeof max !== 'number') {
+			throw new Error('max is required to be a number');
+		}
+
+		return randomEvilNumber(this.random, min, max);
 	}
 
 	/**

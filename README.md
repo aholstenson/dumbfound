@@ -105,6 +105,8 @@ chosen bounds.
 * `int()` - generate a whole number.
 * `int(max)` - generate a whole number between 0 and max (exclusive).
 * `int(min, max)` - generate a whole number between min (inclusive) and max (exclusive).
+* `evilNumber(max)` - generate an evil number that will bias towards numbers that can cause issues.
+* `evilNumberBetween(min, max)` - generate an evil number in the given range that will bias towards numbers that can cause issues.
 
 ### Booleans
 

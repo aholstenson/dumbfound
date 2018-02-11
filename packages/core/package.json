@@ -10,5 +10,6 @@
     "randomized testing"
   ],
   "dependencies": {
+    "nextafter": "^1.0.0"
   }
 }
