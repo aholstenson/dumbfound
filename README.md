@@ -149,4 +149,8 @@ const arr2 = random.gen.int(500000);
 * `set(generator)` - generate a Set (with unique items) with a length between 0 and 10.
 * `set(length, generator)` - generate a Set (with unique items) of the given length.
 
+## Static values and mixed values
 
+* `nan()` - always generate a `NaN` value. For use as a generator.
+* `null()` - always generate a `null` value. For use as a generator.
+* `undefined()` - always generate a `undefined` value. For use as a generator.

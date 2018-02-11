@@ -53,6 +53,27 @@ module.exports = class Randomizer {
 	}
 
 	/**
+	 * Generate an undefined value. For API completeness and use via generators.
+	 */
+	undefined() {
+		return undefined;
+	}
+
+	/**
+	 * Generate a null value. For API completeness and use via generators.
+	 */
+	null() {
+		return null;
+	}
+
+	/**
+	 * Generate a NaN value. For API completeness and use via generators.
+	 */
+	nan() {
+		return NaN;
+	}
+
+	/**
 	 * Generate a positive number between 0 and max.
 	 *
 	 * @param {number} max
