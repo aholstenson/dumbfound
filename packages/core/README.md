@@ -34,5 +34,11 @@ console.log('Using seed:', random.seed);
 console.log('Generated int:', random.int(100));
 ```
 
+## API documentation
+
+For now see the [main repository][repo] for details about the API available
+in tests.
+
 [jest]: https://github.com/aholstenson/dumbfound/tree/master/packages/jest
 [mocha]:https://github.com/aholstenson/dumbfound/tree/master/packages/mocha
+[repo]: https://github.com/aholstenson/dumbfound/

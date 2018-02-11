@@ -34,3 +34,10 @@ randomizedTest('Example', random => {
   // Do something useful with the test here
 });
 ```
+
+## API documentation
+
+For now see the [main repository][repo] for details about the API available
+in tests.
+
+[repo]: https://github.com/aholstenson/dumbfound/
