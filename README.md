@@ -54,15 +54,20 @@ randomizedTest('Example', random => {
 
 ### Strings
 
-*
-  `string(alphabet, length)` - generate a string using the given alphabet.
+All string generation supports the optional `length` parameter, if not specified
+a string between 0 and 20 characters will be returned.
 
-  Alphabets are provided via the `alphabets` key when requiring the library:
+*
+  `string(charGenerator, length)` - generate a string using the given character generator.
+
+  Character generators are required and common implementation are available via
+  the key `chars` when requiring the library:library:
 
   ```javascript
-  const { alphabets } = require('dumbfound-testRunnerHere');
+  const { chars } = require('dumbfound-testRunnerHere');
 
-  randomizer.string(alphabets.ascii.lowercase, 40);
+  randomizer.string(chars.ascii.lowercase, 40);
+  randomizer.string(chars.unicode.basicLatin, 40);
   ```
 
 * `asciiDigits(length)` - generate string with ASCII digits (0 to 9) of the given length.
@@ -70,3 +75,39 @@ randomizedTest('Example', random => {
 * `asciiUppercase(length)` - generate string with ASCII uppwer-case characters (A to Z) of the given length.
 * `ascii(length)` - generate string with ASCII characters (lower-case, upper-case, digits) of the given length.
 * `asciiWithSpaces(length)` - generate string with ASCII characters including spaces of the given length.
+
+## Arrays
+
+Arrays can be created via the `array` function and require a generator function.
+
+```javascript
+const arr1 = random.array(idx => 'Item ' + idx);
+const arr2 = random.gen.int(500000);
+```
+
+* `array(generator)` - generate an array with a length of between 0 and 10 items
+* `array(length, generator)` - generate an array of the given length.
+
+## Generators
+
+Generators are functions that resolve a value when invoked. The Randomizer API
+is available in a generator form, via the `randomizer.gen` object. Generators
+are useful to model a more complex data that you want to use several times.
+
+Example:
+
+```javascript
+const random = // randomizer for your test-case;
+
+/*
+ * Greate a generator that produces an array between 5 and 25 items with
+ * ASCII strings.
+ */
+const fn = random.gen.array(
+  random.gen.intBetween(5, 25),
+  random.gen.ascii()
+);
+
+const array1 = fn();
+const array2 = fn();
+```
