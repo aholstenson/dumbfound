@@ -29,12 +29,18 @@ npm install --save-dev dumbfound-jest
 Use it in your tests:
 
 ```javascript
-const { randomizedTest } = require('dumbfound-jest');
+const { randomizedTest, randomizedRuns } = require('dumbfound-jest');
 
 randomizedTest('Example', random => {
   const totalOrders = random.intBetween(5, 10);
 
   // Do something useful with the test here
+});
+
+randomizedRuns('Group name', 1, 5, () => {
+  randomizedTest('Test in group', random => {
+    ...
+  });
 });
 ```
 

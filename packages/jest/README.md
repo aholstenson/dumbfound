@@ -33,6 +33,12 @@ randomizedTest('Example', random => {
 
   // Do something useful with the test here
 });
+
+randomizedRuns('Group name', 1, 5, () => {
+  randomizedTest('Test in group', random => {
+    ...
+  });
+});
 ```
 
 ## API documentation

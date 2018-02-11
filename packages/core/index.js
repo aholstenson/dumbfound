@@ -18,5 +18,9 @@ module.exports.newRandomizer = function(seed) {
 	return new Randomizer(seed);
 };
 
+module.exports.hasSeed = function() {
+	return !! process.env.SEED;
+};
+
 // Export character generators
 module.exports.chars = require('./chars');
