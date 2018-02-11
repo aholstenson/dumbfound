@@ -76,7 +76,7 @@ a string between 0 and 20 characters will be returned.
 * `ascii(length)` - generate string with ASCII characters (lower-case, upper-case, digits) of the given length.
 * `asciiWithSpaces(length)` - generate string with ASCII characters including spaces of the given length.
 
-## Arrays
+## Arrays and Sets
 
 Arrays can be created via the `array` function and require a generator function.
 
@@ -85,10 +85,12 @@ const arr1 = random.array(idx => 'Item ' + idx);
 const arr2 = random.gen.int(500000);
 ```
 
-* `array(generator)` - generate an array with a length of between 0 and 10 items.
+* `array(generator)` - generate an array with a length between 0 and 10.
 * `array(length, generator)` - generate an array of the given length.
-* `uniqueArray(generator) ` - generate an array with unique items with a length of between 0 and 10 items.
+* `uniqueArray(generator) ` - generate an array with unique items with a length between 0 and 10.
 * `uniqueArray(length, generator)` - generate an array with unique items of the given length.
+* `set(generator)` - generate a Set (with unique items) with a length between 0 and 10.
+* `set(length, generator)` - generate a Set (with unique items) of the given length.
 
 ## Generators
 

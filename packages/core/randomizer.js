@@ -325,4 +325,13 @@ module.exports = class Randomizer {
 
 		return randomArray(length, generator, true);
 	}
+
+	/**
+	 * Generate a Set of the given length. Works the same as `uniqueArray` but
+	 * returns a Set-object instead of an array.
+	 */
+	set(length=undefined, generator) {
+		const values = this.uniqueArray(length, generator);
+		return new Set(values);
+	}
 };
