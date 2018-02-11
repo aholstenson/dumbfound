@@ -42,6 +42,26 @@ randomizedRuns('Group name', 1, 5, () => {
 });
 ```
 
+## Handling failures
+
+Tests created via `randomizedTest` will have information about the seed used
+to run the test appended to their name. The seed is important as it provides
+a way to reproduce the randomness in the test allowing for debugging and fixing
+of the code behind the test. The seed can be input into the test either via an
+argument or via an environment variable named `SEED`.
+
+Using seed with `randomizedTest`:
+
+```javascript
+randomizedTest('Test in group', 'seed-here', random => ...);
+```
+
+It might be useful to use `.only` to limit test running to the given test:
+
+```javascript
+randomizedTest.only('Test in group', 'seed-here', random => ...);
+```
+
 ## API documentation
 
 For now see the [main repository][repo] for details about the API available
