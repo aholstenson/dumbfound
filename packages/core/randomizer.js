@@ -260,4 +260,38 @@ module.exports = class Randomizer {
 	unicode(length=undefined) {
 		return this.string(unicode, length);
 	}
+
+	/**
+	 * Generate an array of the specified length.
+	 *
+	 * @param {number} length
+	 *   The length of the array.
+	 * @param {function} generator
+	 *   Function used to generate values.
+	 */
+	array(length=undefined, generator) {
+
+		if(typeof generator === 'undefined') {
+			// No generator specified, so assuming that length is a generator
+			generator = length;
+			length = undefined;
+		}
+
+		if(typeof length === 'undefined') {
+			length = randomInt(this.random, 0, 10);
+		} else {
+			length = resolveValue(length);
+		}
+
+		if(typeof generator !== 'function') {
+			throw new Error('A generator function must be provided');
+		}
+
+		// Generate the array
+		const result = [];
+		for(let i=0; i<length; i++) {
+			result.push(generator(i));
+		}
+		return result;
+	}
 };
