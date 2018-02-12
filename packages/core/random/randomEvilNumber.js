@@ -3,8 +3,6 @@
 const nextAfter = require('nextafter');
 
 const pickWeighted = require('./pickWeighted');
-const randomInt = require('./randomInt');
-const randomNumber = require('./randomNumber');
 
 /**
  * Generate a random number within the given range, biasing towards more evil
@@ -32,13 +30,13 @@ module.exports = function(random, min, max) {
 		case 0: // Return minimum value
 			return min;
 		case 1: // Return maximum value adjusted down
-			return nextAfter(max, Number.NEGATIVE_INFINITY);
+			return max;
 		case 2: // Near minimum value
 			return adjustUp(random, min, max);
 		case 3: // Near maximum value
 			return adjustDown(random, max, min);
 		case 4: // Normal random number
-			return randomNumber(random, min, max);
+			return random.numberBetween(min, max);
 		case 5: // Near zero
 			return nearZero(random, min, max);
 	}
@@ -48,7 +46,7 @@ module.exports = function(random, min, max) {
  * Adjust the given value downwards a random number of steps.
  */
 function adjustDown(random, value, min) {
-	const steps = randomInt(random, 1, 10);
+	const steps = random.intBetween(random, 1, 10);
 	for(let i=0; i<steps; i++) {
 		value = nextAfter(value, Number.NEGATIVE_INFINITY);
 		if(value === min) break;
@@ -60,7 +58,7 @@ function adjustDown(random, value, min) {
  * Adjust the given value upwards a random number of steps.
  */
 function adjustUp(random, value, max) {
-	const steps = randomInt(random, 1, 10);
+	const steps = random.intBetween(1, 10);
 	for(let i=0; i<steps; i++) {
 		value = nextAfter(value, Number.POSITIVE_INFINITY);
 		if(value === max) break;
@@ -72,7 +70,7 @@ function adjustUp(random, value, max) {
  * Generate a number near or equal to zer.
  */
 function nearZero(random, min, max) {
-	const pick = randomInt(random, 0, 4);
+	const pick = random.intBetween(0, 3);
 	switch(pick) {
 		case 0:
 			// Normal zero

@@ -4,8 +4,6 @@ const generator = require('./generator');
 const random = require('./random/source');
 
 const pickWeighted = require('./random/pickWeighted');
-const randomInt = require('./random/randomInt');
-const randomNumber = require('./random/randomNumber');
 const randomEvilNumber = require('./random/randomEvilNumber');
 const randomBoolean = require('./random/randomBoolean');
 const randomString = require('./random/randomString');
@@ -81,9 +79,9 @@ module.exports = class Randomizer {
 	 * between 0 and max.
 	 *
 	 * @param {number} max
-	 *   Maximum number to generate (exlusive).
+	 *   Maximum number to generate (inclusive).
 	 * @returns
-	 *   Number between the 0 and max (exlusive).
+	 *   Number between the 0 (inclusive) and max (inclusive).
 	 */
 	number(max) {
 		max = resolveValue(max);
@@ -95,7 +93,7 @@ module.exports = class Randomizer {
 			throw new Error('max is required to be a number');
 		}
 
-		return randomNumber(this.random, min, max);
+		return this.random.numberBetween(min, max);
 	}
 
 	/**
@@ -104,9 +102,9 @@ module.exports = class Randomizer {
 	 * @param {number} min
 	 *   Minimum number to generate (inclusive).
 	 * @param {number} max
-	 *   Maximum number to generate (exlusive).
+	 *   Maximum number to generate (inclusive).
 	 * @returns
-	 *   Number between the given min (inclusive) and max (exlusive).
+	 *   Number between the given min (inclusive) and max (inclusive).
 	 */
 	numberBetween(min, max) {
 		min = resolveValue(min);
@@ -120,16 +118,16 @@ module.exports = class Randomizer {
 			throw new Error('max is required to be a number');
 		}
 
-		return randomNumber(this.random, min, max);
+		return this.random.numberBetween(min, max);
 	}
 
 	/**
 	 * Generate a positive integer between 0 and max.
 	 *
 	 * @param {number} max
-	 *   Maximum number to generate (exlusive).
+	 *   Maximum number to generate (inclusive).
 	 * @returns
-	 *   Number between 0 and max (exlusive).
+	 *   Number between 0 and max (inclusive).
 	 */
 	int(max) {
 		max = resolveValue(max);
@@ -141,7 +139,7 @@ module.exports = class Randomizer {
 			throw new Error('max is required to be a number');
 		}
 
-		return randomInt(this.random, min, max);
+		return this.random.intBetween(min, max);
 	}
 
 	/**
@@ -150,9 +148,9 @@ module.exports = class Randomizer {
 	 * @param {number} min
 	 *   Minimum number to generate (inclusive).
 	 * @param {number} max
-	 *   Maximum number to generate (exclusive).
+	 *   Maximum number to generate (inclusive).
 	 * @returns
-	 *   Number between the given min (inclusive) and max (exlusive).
+	 *   Number between the given min (inclusive) and max (inclusive).
 	 */
 	intBetween(min, max) {
 		min = resolveValue(min);
@@ -166,7 +164,7 @@ module.exports = class Randomizer {
 			throw new Error('max is required to be a number');
 		}
 
-		return randomInt(this.random, min, max);
+		return this.random.intBetween(min, max);
 	}
 
 	/**
@@ -250,7 +248,7 @@ module.exports = class Randomizer {
 		length = resolveValue(length);
 		if(typeof length !== 'number') {
 			if(typeof length === 'undefined') {
-				length = randomInt(this.random, 0, 20);
+				length = this.random.intBetween(0, 20);
 			} else {
 				throw new Error('length should be a number');
 			}
@@ -478,7 +476,7 @@ module.exports = class Randomizer {
 		} else if(typeof weights !== 'undefined') {
 			throw new Error('weights must be an array or omitted');
 		} else {
-			idx = randomInt(this.random, 0, items.length);
+			idx = this.random.intBetween(0, items.length - 1);
 		}
 
 		return resolveValue(items[idx]);
@@ -501,7 +499,7 @@ module.exports = class Randomizer {
 		}
 
 		if(typeof length === 'undefined') {
-			length = randomInt(this.random, 0, 10);
+			length = this.random.intBetween(0, 10);
 		} else {
 			length = resolveValue(length);
 		}
@@ -529,7 +527,7 @@ module.exports = class Randomizer {
 		}
 
 		if(typeof length === 'undefined') {
-			length = randomInt(this.random, 0, 10);
+			length = this.random.intBetween(0, 10);
 		} else {
 			length = resolveValue(length);
 		}

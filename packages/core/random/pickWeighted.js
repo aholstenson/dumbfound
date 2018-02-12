@@ -1,7 +1,5 @@
 'use strict';
 
-const randomInt = require('./randomInt');
-
 module.exports = function(random, weights) {
 
 	// First step is to calculate the sum of all weights
@@ -11,7 +9,7 @@ module.exports = function(random, weights) {
 	}
 
 	// Pick the weight value to return
-	let picked = randomInt(random, 0, totalWeight);
+	let picked = random.intBetween(0, totalWeight - 1);
 
 	// Find the actual item for this weight
 	let current = 0;

@@ -1,7 +1,5 @@
 'use strict';
 
-const randomInt = require('../random/randomInt');
-
 const Generator = module.exports.CharGenerator = class CharGenerator {
 };
 
@@ -25,7 +23,7 @@ module.exports.StringCharGenerator = class StringCharGenerator extends Generator
 	}
 
 	pick(random) {
-		const idx = randomInt(random, 0, this.length);
+		const idx = random.intBetween(0, this.length - 1);
 		return this.characters[idx];
 	}
 
@@ -52,7 +50,7 @@ module.exports.CodepointRangeGenerator = class CodepointRangeGenerator extends G
 	}
 
 	pick(random) {
-		const idx = randomInt(random, this.start, this.end);
+		const idx = random.intBetween(this.start, this.end);
 		return String.fromCodePoint(idx);
 	}
 
@@ -143,7 +141,7 @@ module.exports.CombinedGenerator = class CombinedGenerator extends Generator {
 			// Assume the value matches the last Generator
 			return this.generators[this.generators.length - 1].generator.pick(random);
 		} else {
-			let idx = randomInt(random, 0, this.length);
+			let idx = random.intBetween(0, this.length - 1);
 			return this.get(idx);
 		}
 	}

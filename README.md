@@ -107,11 +107,11 @@ chosen bounds.
 ### Numbers
 
 * `number()` - generate a number.
-* `number(max)` - generate a number between 0 and max (exclusive).
-* `numberBetween(min, max)` - generate a number between min (exlusive) and max (exclusive).
+* `number(max)` - generate a number between 0 and max (inclusive).
+* `numberBetween(min, max)` - generate a number between min (inclusive) and max (inclusive).
 * `int()` - generate a whole number.
-* `int(max)` - generate a whole number between 0 and max (exclusive).
-* `int(min, max)` - generate a whole number between min (inclusive) and max (exclusive).
+* `int(max)` - generate a whole number between 0 and max (inclusive).
+* `int(min, max)` - generate a whole number between min (inclusive) and max (inclusive).
 * `evilNumber(max)` - generate an evil number that will bias towards numbers that can cause issues.
 * `evilNumberBetween(min, max)` - generate an evil number in the given range that will bias towards numbers that can cause issues.
 
@@ -178,6 +178,7 @@ const arr2 = random.array(25, random.gen.int(500000));
 ### Misc
 
 * `uuid()` - generate a UUIDv4.
+
 
 ## A note on randomness
 

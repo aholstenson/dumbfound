@@ -14,10 +14,10 @@ function toHex(f) {
  * standard.
  */
 module.exports = function(random) {
-	const r0 = random() * 0xffffffff | 0;
-	const r1 = random() * 0xffffffff | 0;
-	const r2 = random() * 0xffffffff | 0;
-	const r3 = random() * 0xffffffff | 0;
+	const r0 = random.number() * 0xffffffff | 0;
+	const r1 = random.number() * 0xffffffff | 0;
+	const r2 = random.number() * 0xffffffff | 0;
+	const r3 = random.number() * 0xffffffff | 0;
 
 	return toHex(r0 & 0xff)
 		+ toHex(r0 >> 8 & 0xff)

@@ -1,7 +1,6 @@
 'use strict';
 
 const { CharGenerator, CodepointRangeGenerator } = require('./generators');
-const randomInt = require('../random/randomInt');
 
 const MIN_SURROGATE = 0xD800;
 const MAX_SURROGATE = 0xDFFF;
@@ -26,7 +25,7 @@ class UnicodeGenerator extends CharGenerator {
 	}
 
 	pick(random) {
-		const idx = randomInt(random, 0, this.length);
+		const idx = random.intBetween(0, this.length - 1);
 		return this.get(idx);
 	}
 }
