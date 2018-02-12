@@ -63,7 +63,7 @@ const picked = random.pick([ 'a', 'b', 'c' ]);
 ```
 
 Generators are functions that resolve a value when invoked. The Randomizer API
-is available in a generator form, via the `gen` 7property. Generators
+is available in a generator form, via the `gen` property. Generators
 are useful to model a more complex data that you want to use several times.
 
 Example of creating generator functions:
@@ -127,19 +127,18 @@ chosen bounds.
 All string generation supports the optional `length` parameter, if not specified
 a string between 0 and 20 characters will be returned.
 
-*
-  `string(charGenerator, length)` - generate a string using the given character generator.
+Some basic methods for generationis provided but most uses should be done via
+`string(charGenerator, length)`. Common character generators are available
+via the key `chars` when requiring the library:
 
-  Character generators are required and common implementation are available via
-  the key `chars` when requiring the library:
+```javascript
+const { chars } = require('dumbfound-testRunnerHere');
 
-  ```javascript
-  const { chars } = require('dumbfound-testRunnerHere');
+randomizer.string(chars.ascii.lowercase, 40);
+randomizer.string(chars.unicode.basicLatin, 40);
+```
 
-  randomizer.string(chars.ascii.lowercase, 40);
-  randomizer.string(chars.unicode.basicLatin, 40);
-  ```
-
+* `string(charGenerator, length)` - generate a string using the given character generator.
 * `asciiDigits(length)` - generate string with ASCII digits (0 to 9) of the given length.
 * `asciiLowercase(length)` - generate string with ASCII lower-case characters (a to z) of the given length.
 * `asciiUppercase(length)` - generate string with ASCII uppwer-case characters (A to Z) of the given length.
