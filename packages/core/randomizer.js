@@ -448,6 +448,20 @@ module.exports = class Randomizer {
 	}
 
 	/**
+	 * Return `true` frequently (90% of the time).
+	 */
+	frequently() {
+		return this.random.number() < 0.9;
+	}
+
+	/**
+	 * Return `false` frequently (90% of the time).
+	 */
+	rarely() {
+		return ! this.frequently();
+	}
+
+	/**
 	 * Pick one of the items in the given array using an equally distributed
 	 * probability.
 	 *

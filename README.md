@@ -119,6 +119,8 @@ chosen bounds.
 
 * `boolean()` - generate either `true` or `false`.
 * `boolean(trueProbability)` - generate either `true` or `false`, probability of true is between 0 and 1.
+* `frequently()` - generate `true` frequently and `false` otherwise.
+* `rarely()` - generate `false` frequently and `true` otherwise.
 
 ### Strings
 
