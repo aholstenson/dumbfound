@@ -112,7 +112,7 @@ module.exports.CombinedGenerator = class CombinedGenerator extends Generator {
 			current += a.probability;
 		}
 
-		this.Generators = generatorsWithProbability;
+		this.generators = generatorsWithProbability;
 	}
 
 	get(idx) {
