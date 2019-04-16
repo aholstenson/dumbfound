@@ -7,6 +7,13 @@ export interface Randomizer {
 	readonly gen: RandomizerGenerator;
 
 	/**
+	 * Get a value by calling a generator.
+	 *
+	 * @param generator
+	 */
+	get<V>(generator: Generator<V>): V;
+
+	/**
 	 * Generate an undefined value. For API completeness and use via generators.
 	 */
 	undefined(): undefined;

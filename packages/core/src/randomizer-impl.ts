@@ -53,6 +53,10 @@ export class RandomizerImpl implements Randomizer {
 		this.gen = createGenerator(this);
 	}
 
+	public get<V>(generator: Generator<V>): V {
+		return generator(this);
+	}
+
 	/**
 	 * Generate an undefined value. For API completeness and use via generators.
 	 */
