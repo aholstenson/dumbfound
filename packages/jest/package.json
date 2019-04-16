@@ -2,7 +2,8 @@
   "name": "dumbfound-jest",
   "version": "0.3.1",
   "description": "Jest plugin for randomized testing",
-  "main": "index.js",
+  "main": "dist/cjs/index.js",
+  "types": "dist/types/index.d.ts",
   "license": "MIT",
   "repository": "https://github.com/aholstenson/dumbfound/tree/master/packages/jest",
   "keywords": [
@@ -11,12 +12,24 @@
     "testing"
   ],
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "ci": "npm run coverage && npm run lint",
+    "coverage": "jest --coverage",
+    "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
+    "build": "tsc --module commonjs --target es5 --outDir dist/cjs",
+    "prebuild": "rimraf dist",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "dumbfound": "^0.3.1"
+    "@types/jest": "^24.0.11",
+    "jest": "^24.7.1"
   },
   "devDependencies": {
-    "jest": "^22.2.2"
+    "@types/jest": "^24.0.11",
+    "@types/node": "^11.13.4",
+    "dumbfound": "^0.3.1",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.3"
   }
 }

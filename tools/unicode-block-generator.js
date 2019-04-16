@@ -12,9 +12,8 @@ for(const line of block.split('\n')) {
 	const upper = m[2];
 	const name = m[3]
 		.replace('-', '')
-		.replace(/^[A-Z]+/, f => f.toLowerCase())
 		.replace(/ [A-Za-z]/g, f => f.trim().toUpperCase());
 
 	console.log('/** Unicode Block: ' + m[3] + ' */');
-	console.log('module.exports.' + name + ' = new CodepointRangeGenerator(0x' + lower + ', 0x' + upper + ');');
+	console.log('export const unicode' + name + ' = new CodepointRangeGenerator(0x' + lower + ', 0x' + upper + ');');
 }

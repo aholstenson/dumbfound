@@ -2,7 +2,8 @@
   "name": "dumbfound",
   "version": "0.3.1",
   "description": "Utility for randomized testing",
-  "main": "index.js",
+  "main": "dist/cjs/index.js",
+  "types": "dist/types/index.d.ts",
   "license": "MIT",
   "repository": "https://github.com/aholstenson/dumbfound/tree/master/packages/core",
   "keywords": [
@@ -10,13 +11,22 @@
     "randomized testing"
   ],
   "scripts": {
-    "test": "mocha tests/**/*.test.js"
+    "test": "jest",
+    "ci": "npm run coverage && npm run lint",
+    "coverage": "jest --coverage",
+    "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
+    "build": "tsc --module commonjs --target es5 --outDir dist/cjs",
+    "prebuild": "rimraf dist",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "nextafter": "^1.0.0"
+    "@types/jest": "^24.0.11"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "mocha": "^5.0.0"
+    "@types/jest": "^24.0.11",
+    "@types/node": "^11.13.4",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.3"
   }
 }

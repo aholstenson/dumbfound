@@ -1,0 +1,14 @@
+
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"declarationDir": "dist/types",
+		"types" : [
+			"@types/jest",
+			"@types/node"
+		]
+	},
+	"include": [
+		"src"
+	]
+}
