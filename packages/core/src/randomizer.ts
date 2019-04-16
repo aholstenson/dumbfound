@@ -106,7 +106,7 @@ export interface Randomizer {
 	 * @param {Generator} generator
 	 *   The generator to use for creating the string.
 	 */
-	string(generator: Source<CharGenerator>, length?: Source<number>): string;
+	string(generator: Source<CharGenerator | CharGenerator[]>, length?: Source<number>): string;
 
 	/**
 	 * Generate string with the given length consisting of printable ASCII

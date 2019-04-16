@@ -3,7 +3,7 @@
 import { Random, createRandom } from './random/random-source';
 import { randomEvilNumber } from './random/randomEvilNumber';
 import { randomBoolean } from './random/randomBoolean';
-import { CharGenerator, ascii, asciiDigits, asciiLowercase, asciiUppercase, asciiAlphaNumeric, asciiAlphaNumericWithSpaces, allOfUnicode } from './chars';
+import { CharGenerator, ascii, asciiDigits, asciiLowercase, asciiUppercase, asciiAlphaNumeric, asciiAlphaNumericWithSpaces, allOfUnicode, isCharGenerator, CombinedGenerator } from './chars';
 import { randomString } from './random/randomString';
 import { pickWeighted } from './random/pickWeighted';
 import { Randomizer } from './randomizer';
@@ -239,10 +239,15 @@ export class RandomizerImpl implements Randomizer {
 	 * @param {Generator} generator
 	 *   The generator to use for creating the string.
 	 */
-	public string(generator: CharGenerator, length?: Source<number>): string {
+	public string(generator: Source<CharGenerator | CharGenerator[]>, length?: Source<number>): string {
 		generator = resolveValue(this, generator);
-		if(! isGenerator(generator)) {
-			throw new Error('Generator must be provided');
+		if(Array.isArray(generator)) {
+			// If this is an array, combine it into a single char generator
+			generator = new CombinedGenerator(...generator);
+		}
+
+		if(! isCharGenerator(generator)) {
+			throw new Error('Character generator must be provided');
 		}
 
 		length = typeof length === 'undefined' ? undefined : resolveValue(this, length);
