@@ -1,9 +1,8 @@
 {
-	"scripts": {
-	},
+	"scripts": {},
 	"devDependencies": {
 		"@types/node": "^11.13.4",
-		"lerna": "^3.13.1",
+		"lerna": "^3.13.2",
 		"tslint": "^5.15.0",
 		"typescript": "^3.4.3"
 	}
