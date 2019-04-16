@@ -1,6 +1,6 @@
 {
   "name": "dumbfound-mocha",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Mocha plugin for randomized testing",
   "main": "dist/cjs/index.js",
   "types": "dist/types/index.d.ts",
@@ -20,7 +20,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "dumbfound": "^0.3.1"
+    "dumbfound": "^0.4.0"
   },
   "devDependencies": {
     "@types/mocha": "^5.2.6",
