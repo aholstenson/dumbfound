@@ -1,8 +1,9 @@
 # Dumbfound
 
-Randomized testing for JavaScript. Dumbfound hooks into test runners such as
-Mocha and Jest and provides randomization for specified tests and helps with
-making test failures reproducible.
+Randomized testing for JavaScript and TypeScript. Dumbfound hooks into test
+runners such as [Mocha](https://mochajs.org/) and [Jest](https://jestjs.io/)
+and provides randomization for specified tests and helps with making test
+failures reproducible.
 
 ## Introduction
 
@@ -72,7 +73,7 @@ Example of creating generator functions:
 // Create a function that generates an int between 0 and 500
 const intCreator = random.gen.int(500);
 
-// Generate an in between 0 and 500
+// Generate an int between 0 and 500
 const i = intCreator();
 const i2 = intCreator(); // Will generate another int
 
@@ -86,7 +87,7 @@ Example of more complex generator:
 
 ```javascript
 /*
- * Greate a generator that produces an array between 5 and 25 items with
+ * Create a generator that produces an array between 5 and 25 items with
  * ASCII strings.
  */
 const fn = random.gen.array(
@@ -106,80 +107,113 @@ chosen bounds.
 
 ### Numbers
 
-* `number()` - generate a number.
-* `number(max)` - generate a number between 0 and max (inclusive).
-* `numberBetween(min, max)` - generate a number between min (inclusive) and max (inclusive).
-* `int()` - generate a whole number.
-* `int(max)` - generate a whole number between 0 and max (inclusive).
-* `int(min, max)` - generate a whole number between min (inclusive) and max (inclusive).
-* `evilNumber(max)` - generate an evil number that will bias towards numbers that can cause issues.
-* `evilNumberBetween(min, max)` - generate an evil number in the given range that will bias towards numbers that can cause issues.
+* `number(max?: number): number` - generate a number between `-9007199254.740992`
+  and `9007199254.740992`. If max is specified generate a number between `0` and
+  max (inclusive).
+* `numberBetween(min: number, max: number): number` - generate a number between
+  min (inclusive) and max (inclusive).
+* `int(max?: number): number` - generate a whole number between `-9007199254740991`
+  and `9007199254740991`. If max is specified generate a whole number between `0`
+  and max (inclusive).
+* `intBetween(min: number, max: number): number` - generate a whole number between 
+  min (inclusive) and max (inclusive).
+* `evilNumber(max?: number): number` - generate an evil number that will bias
+  towards numbers that can cause issues. Follows the same rules as `number(max?)`.
+* `evilNumberBetween(min: number, max: number): number` - generate an evil
+  number in the given range that will bias towards numbers that can cause 
+  issues.
 
 ### Booleans
 
-* `boolean()` - generate either `true` or `false`.
-* `boolean(trueProbability)` - generate either `true` or `false`, probability of true is between 0 and 1.
-* `frequently()` - generate `true` frequently and `false` otherwise.
-* `rarely()` - generate `false` frequently and `true` otherwise.
+* `boolean(trueProbability=0.5): boolean` - generate either `true` or `false`.
+  Optionally specify a probability to return true between 0 and 1.
+* `frequently(): boolean` - generate `true` frequently and `false` otherwise.
+* `rarely(): boolean` - generate `false` frequently and `true` otherwise.
 
 ### Strings
 
 All string generation supports the optional `length` parameter, if not specified
 a string between 0 and 20 characters will be returned.
 
-Some basic methods for generationis provided but most uses should be done via
-`string(charGenerator, length)`. Common character generators are available
-via the key `chars` when requiring the library:
+* `string(generator: CharGenerator | CharGenerator[], length?: number): string` - 
+  generate a string using the given character generator.
+* `asciiDigits(length?: number): string` - generate string with ASCII digits
+  (0 to 9) of the given length.
+* `asciiLowercase(length?: number): string` - generate string with ASCII
+  lower-case characters (a to z) of the given length.
+* `asciiUppercase(length?: number): string` - generate string with ASCII
+  upper-case characters (A to Z) of the given length.
+* `ascii(length?: number): string` - generate string with ASCII characters 
+  (lower-case, upper-case, digits) of the given length.
+* `asciiWithSpaces(length?: number): string` - generate string with ASCII
+  characters including spaces of the given length.
+* `unicode(length?: number): string` - generate a string with any Unicode
+  character of the given length.
+
+There are a lot of character sources available:
 
 ```javascript
-const { chars } = require('dumbfound-testRunnerHere');
+const { asciiDigits, unicodeBasicLatin, unicodeArrows } = require('dumbfound-testRunnerHere');
 
-randomizer.string(chars.ascii.lowercase, 40);
-randomizer.string(chars.unicode.basicLatin, 40);
+// Generate with a single character source
+randomizer.string(asciiDigits, 40);
+
+// Generate with multiple character sources
+randomizer.string([ unicodeBasicLatin, unicodeArrows ], 40);
 ```
 
-* `string(charGenerator, length)` - generate a string using the given character generator.
-* `asciiDigits(length)` - generate string with ASCII digits (0 to 9) of the given length.
-* `asciiLowercase(length)` - generate string with ASCII lower-case characters (a to z) of the given length.
-* `asciiUppercase(length)` - generate string with ASCII uppwer-case characters (A to Z) of the given length.
-* `ascii(length)` - generate string with ASCII characters (lower-case, upper-case, digits) of the given length.
-* `asciiWithSpaces(length)` - generate string with ASCII characters including spaces of the given length.
-* `unicode(length)` - generate a string with any Unicode character of the given length.
+See [available sources](https://github.com/aholstenson/dumbfound/tree/master/docs/character-generators.md)
+for a list of character sources.
 
 ### Arrays and Sets
 
 Arrays can be created via the `array` function and require a generator function.
 
 ```javascript
-const arr1 = random.array(idx => 'Item ' + idx);
-const arr2 = random.array(25, random.gen.int(500000));
+// Generate an array with 25 random numbers
+const arr1 = random.array(25, random.gen.int(500000));
+
+// Generate an array with 10 strings consisting of ASCII digits
+const arr2 = random.array(10, randomizer => randomizer.asciiDigits());
+
+// Generate an array of primitive values between 5 and 10 items
+const arr3 = random.array(random.intBetween(5, 10), random.gen.primitiveValue());
 ```
 
-* `array(generator)` - generate an array with a length between 0 and 10.
-* `array(length, generator)` - generate an array of the given length.
-* `uniqueArray(generator) ` - generate an array with unique items with a length between 0 and 10.
-* `uniqueArray(length, generator)` - generate an array with unique items of the given length.
-* `set(generator)` - generate a Set (with unique items) with a length between 0 and 10.
-* `set(length, generator)` - generate a Set (with unique items) of the given length.
+* `array(length: number, generator: Generator<ValueType>): ValueType[]` - 
+  generate an array of the given length, the generator should be a function that
+  returns a single value.
+* `uniqueArray(length: number, generator: Generator<ValueType>): ValueType[]` -
+  generate an array with unique items of the given length. Generator should be
+  a function that returns a single value.
+* `set(length: number, generator: Generator<ValueType>): Set<ValueType>` - 
+  generate a Set (with unique items) of the given length.
 
 ### Static values
 
-* `nan()` - always generate a `NaN` value. For use as a generator.
-* `null()` - always generate a `null` value. For use as a generator.
-* `undefined()` - always generate a `undefined` value. For use as a generator.
+* `nan(): NaN` - always generate a `NaN` value. For use as a generator.
+* `null(): null` - always generate a `null` value. For use as a generator.
+* `undefined(): undefined` - always generate a `undefined` value. For use as a generator.
 
 ### Value picking
 
-* `pick(items)` - pick a single item from the given array. Items in the array may be generators in which case they will be resolved.
-* `pick(items, weights)` - pick a single item from the given array while applying weights to each item.
-* `primitiveValue()` - generate a primitive value, either `null`, `NaN`, `undefined`, a number, a boolean or a string. 
-* `truthy()` - generate a truthy value, that is a value that when used with `if(value)` would resolve to `true`.
-* `falsy()` - generate a falsy value, that is a value that when used with `if(value)` would resolve to `false`.
+* `pick(items: ValueType[]): ValueType` - pick a single item from the given
+  array. Items in the array may be generators in which case they will be resolved.
+* `pick(items: ValueType[], weights: number[]): ValueType` - pick a single item
+  from the given array while applying weights to each item.
+* `primitiveValue()` - generate a primitive value, either `null`, `NaN`,
+  `undefined`, a number, a boolean or a string. 
+* `truthy(): any` - generate a truthy value, that is a value that when used with 
+  `if(value)` would resolve to `true`.
+* `falsy(): any` - generate a falsy value, that is a value that when used with
+  `if(value)` would resolve to `false`.
 
 ### Misc
 
-* `uuid()` - generate a UUIDv4.
-
+* `uuid(): string` - generate a UUIDv4.
+* `get(generator: Generator<ValueType>): ValueType` - resolve by invoking a
+  generator function. The function may take a randomizer as its first argument
+  and should return a value.
 
 ## A note on randomness
 
