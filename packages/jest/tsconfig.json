@@ -1,8 +1,12 @@
 
 {
-	"extends": "../../tsconfig.json",
+	"extends": "../../tsconfig.settings.json",
 	"compilerOptions": {
+		"baseUrl": ".",
+		"rootDir": "./src",
+		"outDir": "dist/cjs",
 		"declarationDir": "dist/types",
+
 		"types" : [
 			"@types/jest",
 			"@types/node"
@@ -10,5 +14,8 @@
 	},
 	"include": [
 		"src"
+	],
+	"references": [
+		{ "path": "../core" }
 	]
 }
